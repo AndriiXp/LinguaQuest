@@ -1,0 +1,293 @@
+{
+  "skillKey": "greetings_a1",
+  "cefrLevel": "A1",
+  "category": "vocab",
+  "title": "Приветствия и знакомство",
+  "subtitle": "Первые слова, с которых начинается разговор",
+  "iconName": "hand.wave.fill",
+  "prerequisiteKeys": [],
+  "sourceStandard": "CEFR Companion Volume (A1 «can-do»: базовое социальное взаимодействие) + Oxford 3000",
+  "lessons": [
+    {
+      "lessonId": "g_a1_l1",
+      "title": "Здравствуй и до свидания",
+      "orderIndex": 1,
+      "xpReward": 20,
+      "exercises": [
+        {
+          "id": "g1_e1",
+          "type": "multiple_choice",
+          "prompt": "Как сказать «привет»?",
+          "correctAnswer": "hello",
+          "options": [
+            "hello",
+            "goodbye",
+            "please"
+          ],
+          "hint": "Самое первое слово при встрече",
+          "explanation": "Hello — универсальное приветствие в любой ситуации.",
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_hello"
+          ],
+          "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g1_e2",
+          "type": "multiple_choice",
+          "prompt": "Утром вы говорите: Good ___!",
+          "correctAnswer": "morning",
+          "options": [
+            "morning",
+            "evening",
+            "name"
+          ],
+          "explanation": "Good morning — до полудня, good evening — после шести вечера.",
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_morning"
+          ],
+          "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g1_e3",
+          "type": "type_answer",
+          "prompt": "Переведите: до свидания",
+          "correctAnswer": "goodbye",
+          "acceptedAnswers": [
+            "good bye",
+            "bye"
+          ],
+          "hint": "Начинается с good...",
+          "explanation": "Goodbye — нейтральное прощание, bye — более разговорное.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_goodbye"
+          ],
+          "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g1_e4",
+          "type": "match_pairs",
+          "prompt": "Соедините слова с переводом",
+          "pairs": [
+            {
+              "id": "p1",
+              "left": "hello",
+              "right": "привет"
+            },
+            {
+              "id": "p2",
+              "left": "goodbye",
+              "right": "до свидания"
+            },
+            {
+              "id": "p3",
+              "left": "morning",
+              "right": "утро"
+            },
+            {
+              "id": "p4",
+              "left": "evening",
+              "right": "вечер"
+            }
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_hello",
+            "v_goodbye",
+            "v_morning",
+            "v_evening"
+          ],
+          "errorCategory": "vocabulary",
+          "explanation": "Эти четыре слова — основа любого приветствия и прощания."
+        },
+        {
+          "id": "g1_e5",
+          "type": "multiple_choice",
+          "prompt": "What is your ___? — Anna.",
+          "correctAnswer": "name",
+          "options": [
+            "name",
+            "hello",
+            "please"
+          ],
+          "explanation": "What is your name? — «Как тебя зовут?», дословно «Какое твоё имя?».",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_name"
+          ],
+          "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g1_e6",
+          "type": "type_answer",
+          "prompt": "Переведите: учитель",
+          "correctAnswer": "teacher",
+          "hint": "От глагола teach — учить",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_teacher"
+          ],
+          "errorCategory": "spelling",
+          "explanation": "Teacher = teach + -er: «тот, кто учит». Так же works → worker."
+        },
+        {
+          "id": "g1_e7",
+          "type": "multiple_choice",
+          "prompt": "Nice to meet ___.",
+          "correctAnswer": "you",
+          "options": [
+            "you",
+            "your",
+            "yours"
+          ],
+          "explanation": "Nice to meet you — «приятно познакомиться». После meet нужна форма you.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_nice"
+          ],
+          "errorCategory": "pronouns"
+        }
+      ]
+    },
+    {
+      "lessonId": "g_a1_l2",
+      "title": "Вежливые слова",
+      "orderIndex": 2,
+      "xpReward": 20,
+      "exercises": [
+        {
+          "id": "g2_e1",
+          "type": "multiple_choice",
+          "prompt": "Two coffees, ___.",
+          "correctAnswer": "please",
+          "options": [
+            "please",
+            "sorry",
+            "goodbye"
+          ],
+          "explanation": "Please делает просьбу вежливой. Sorry — извинение, goodbye — прощание.",
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_please"
+          ],
+          "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g2_e2",
+          "type": "type_answer",
+          "prompt": "Переведите: спасибо",
+          "correctAnswer": "thank you",
+          "acceptedAnswers": [
+            "thanks"
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_thank_you"
+          ],
+          "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g2_e3",
+          "type": "multiple_choice",
+          "prompt": "Вы опоздали. Что сказать?",
+          "correctAnswer": "Sorry, I am late.",
+          "options": [
+            "Sorry, I am late.",
+            "Please, I am late.",
+            "Hello, I am late."
+          ],
+          "explanation": "Sorry — извинение за уже случившееся.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_sorry"
+          ],
+          "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g2_e4",
+          "type": "match_pairs",
+          "prompt": "Соедините слова с переводом",
+          "pairs": [
+            {
+              "id": "p1",
+              "left": "please",
+              "right": "пожалуйста (просьба)"
+            },
+            {
+              "id": "p2",
+              "left": "sorry",
+              "right": "извините"
+            },
+            {
+              "id": "p3",
+              "left": "friend",
+              "right": "друг"
+            },
+            {
+              "id": "p4",
+              "left": "student",
+              "right": "студент"
+            }
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_please",
+            "v_sorry",
+            "v_friend",
+            "v_student"
+          ],
+          "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g2_e5",
+          "type": "type_answer",
+          "prompt": "Переведите: друг",
+          "correctAnswer": "friend",
+          "hint": "Шесть букв, начинается с f",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_friend"
+          ],
+          "errorCategory": "spelling",
+          "explanation": "Friend пишется через -ie-, хотя слышится как [e]."
+        },
+        {
+          "id": "g2_e6",
+          "type": "multiple_choice",
+          "prompt": "She is a ___ at our school.",
+          "correctAnswer": "student",
+          "options": [
+            "student",
+            "study",
+            "students"
+          ],
+          "explanation": "После артикля a нужна форма единственного числа: a student.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_student"
+          ],
+          "errorCategory": "articles"
+        },
+        {
+          "id": "g2_e7",
+          "type": "multiple_choice",
+          "prompt": "Good ___! (в семь часов вечера)",
+          "correctAnswer": "evening",
+          "options": [
+            "evening",
+            "morning",
+            "night"
+          ],
+          "explanation": "Good night говорят при прощании перед сном, а не при встрече.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_evening"
+          ],
+          "errorCategory": "vocabulary"
+        }
+      ]
+    }
+  ]
+}

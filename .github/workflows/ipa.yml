@@ -1,0 +1,94 @@
+name: Сборка IPA для телефона
+
+# Собирает неподписанный .ipa, который затем подписывается на твоём компьютере
+# через Sideloadly бесплатным Apple ID. Подпись здесь не выполняется намеренно:
+# для неё нужен платный Apple Developer Program.
+#
+# Запуск: вкладка Actions → «Сборка IPA для телефона» → Run workflow.
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  ipa:
+    name: Неподписанный IPA
+    runs-on: macos-15
+    timeout-minutes: 40
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Версия Xcode
+        run: |
+          sudo xcode-select -s /Applications/Xcode_16.app || true
+          xcodebuild -version
+
+      - name: Установить XcodeGen
+        run: brew install xcodegen
+
+      - name: Сгенерировать проект
+        run: xcodegen generate
+
+      - name: Номер сборки из счётчика запусков
+        run: |
+          # Уникальный build number на каждый запуск — иначе устройство
+          # может считать сборку той же самой и не обновить приложение.
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${{ github.run_number }}" App/Info.plist
+
+      - name: Архив без подписи
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -project LinguaQuest.xcodeproj \
+            -scheme LinguaQuest \
+            -configuration Release \
+            -archivePath build/LinguaQuest.xcarchive \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee archive.log
+
+      - name: Упаковать .app в .ipa
+        run: |
+          # .ipa — это zip с папкой Payload внутри. Подписи нет,
+          # её поставит Sideloadly на твоём компьютере.
+          mkdir -p build/Payload
+          cp -r build/LinguaQuest.xcarchive/Products/Applications/LinguaQuest.app build/Payload/
+          cd build
+          zip -qry LinguaQuest-unsigned.ipa Payload
+          ls -lh LinguaQuest-unsigned.ipa
+
+      - name: Отчёт
+        if: always()
+        run: |
+          {
+            echo "### Сборка ${{ github.run_number }}"
+            if [ -f build/LinguaQuest-unsigned.ipa ]; then
+              echo "IPA готов: скачай артефакт \`LinguaQuest-ipa\` ниже и установи через Sideloadly."
+              echo "Инструкция: \`Docs/deploy-to-iphone.md\`"
+            else
+              echo "Сборка упала. Ошибки:"
+              echo '```'
+              grep -E "error:" archive.log | head -40 || true
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Загрузить IPA
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: LinguaQuest-ipa
+          path: build/LinguaQuest-unsigned.ipa
+          retention-days: 30
+
+      - name: Лог архива
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: archive-log
+          path: archive.log
+          retention-days: 14

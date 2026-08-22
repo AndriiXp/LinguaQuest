@@ -1,0 +1,102 @@
+name: CI
+
+# Главная задача этого workflow — компилировать проект на macOS,
+# потому что ни на Windows, ни в облачной сессии Swift-компилятора нет.
+# Любая ошибка сборки должна всплывать здесь, а не на устройстве.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Сборка и тесты
+    runs-on: macos-latest
+    timeout-minutes: 40
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Окружение
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Проверка контента и референсных алгоритмов
+        run: |
+          python3 Tools/validate_content.py
+          python3 Tools/reference_algorithms.py
+
+      - name: Установить XcodeGen
+        run: brew install xcodegen
+
+      - name: Сгенерировать проект
+        run: xcodegen generate
+
+      - name: Выбрать симулятор
+        id: sim
+        run: |
+          # Имя конкретной модели меняется от образа к образу,
+          # поэтому берём первый доступный iPhone, а не хардкодим «iPhone 16».
+          NAME=$(xcrun simctl list devices available \
+            | grep -Eo 'iPhone [0-9A-Za-z ]+ \(' \
+            | head -1 | sed 's/ (//' | xargs)
+          if [ -z "$NAME" ]; then
+            echo "Не найден ни один симулятор iPhone"; xcrun simctl list devices available; exit 1
+          fi
+          echo "Симулятор: $NAME"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+      # Пакет объявлен как iOS-only, поэтому `swift test` на хосте его не соберёт —
+      # тесты гоняем через симулятор, схемой пакета.
+      - name: Тесты пакета LinguaQuestKit
+        working-directory: Packages/LinguaQuestKit
+        run: |
+          set -o pipefail
+          xcodebuild -list 2>&1 | tee ../../schemes.log
+          xcodebuild test \
+            -scheme LinguaQuestKit-Package \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
+            -resultBundlePath ../../TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee ../../swift-test.log
+
+      - name: Сборка приложения
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project LinguaQuest.xcodeproj \
+            -scheme LinguaQuest \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee xcodebuild.log
+
+      - name: Отчёт об ошибках
+        if: failure()
+        run: |
+          {
+            echo "### Ошибки"
+            echo '```'
+            grep -hE "error:|failed|FAIL" xcodebuild.log swift-test.log 2>/dev/null \
+              | grep -v "^$" | head -60 || echo "Ошибок по шаблону не найдено — смотри артефакт build-logs"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Логи
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            xcodebuild.log
+            swift-test.log
+            schemes.log
+          retention-days: 14
+          if-no-files-found: ignore

@@ -1,0 +1,33 @@
+# XcodeGen генерирует проект — в git он не нужен
+*.xcodeproj
+*.xcworkspace
+!*.xcodeproj/project.xcworkspace/xcshareddata
+
+# Xcode
+DerivedData/
+build/
+.build/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+
+# SwiftPM
+.swiftpm/
+Package.resolved
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Секреты (появятся в Фазе 2)
+GoogleService-Info.plist
+*.xcconfig.local
+
+# временные файлы переноса
+_to_delete/

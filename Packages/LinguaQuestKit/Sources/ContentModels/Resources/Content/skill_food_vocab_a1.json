@@ -1,0 +1,294 @@
+{
+  "skillKey": "food_vocab_a1",
+  "cefrLevel": "A1",
+  "category": "vocab",
+  "title": "Еда и напитки",
+  "subtitle": "Заказать завтрак и не остаться голодным",
+  "iconName": "cup.and.saucer.fill",
+  "prerequisiteKeys": [
+    "greetings_a1"
+  ],
+  "sourceStandard": "CEFR Companion Volume (A1: еда и напитки, заказ в кафе) + NGSL",
+  "lessons": [
+    {
+      "lessonId": "fv_a1_l1",
+      "title": "На кухне",
+      "orderIndex": 1,
+      "xpReward": 20,
+      "exercises": [
+        {
+          "id": "fv1_e1",
+          "type": "multiple_choice",
+          "prompt": "Как будет «хлеб»?",
+          "correctAnswer": "bread",
+          "options": [
+            "bread",
+            "cheese",
+            "rice"
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_bread"
+          ],
+          "errorCategory": "vocabulary",
+          "explanation": "Bread — неисчисляемое: «два хлеба» будет two loaves of bread."
+        },
+        {
+          "id": "fv1_e2",
+          "type": "match_pairs",
+          "prompt": "Соедините слова с переводом",
+          "pairs": [
+            {
+              "id": "p1",
+              "left": "water",
+              "right": "вода"
+            },
+            {
+              "id": "p2",
+              "left": "milk",
+              "right": "молоко"
+            },
+            {
+              "id": "p3",
+              "left": "apple",
+              "right": "яблоко"
+            },
+            {
+              "id": "p4",
+              "left": "egg",
+              "right": "яйцо"
+            }
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_water",
+            "v_milk",
+            "v_apple",
+            "v_egg"
+          ],
+          "errorCategory": "vocabulary",
+          "explanation": "Четыре продукта, которые есть почти на любой кухне."
+        },
+        {
+          "id": "fv1_e3",
+          "type": "type_answer",
+          "prompt": "Переведите: сыр",
+          "correctAnswer": "cheese",
+          "hint": "Шесть букв, начинается с ch",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_cheese"
+          ],
+          "errorCategory": "spelling",
+          "explanation": "Cheese: буквосочетание ch читается как [ч], ee — как долгое [и]."
+        },
+        {
+          "id": "fv1_e4",
+          "type": "multiple_choice",
+          "prompt": "There is no ___ in the fridge.",
+          "correctAnswer": "milk",
+          "options": [
+            "milk",
+            "milks",
+            "a milk"
+          ],
+          "explanation": "Milk — неисчисляемое: без артикля a и без -s.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_milk"
+          ],
+          "errorCategory": "articles"
+        },
+        {
+          "id": "fv1_e5",
+          "type": "multiple_choice",
+          "prompt": "Какое предложение верное?",
+          "correctAnswer": "He eats an apple after lunch.",
+          "options": [
+            "He eats an apple after lunch.",
+            "He eats a apple after lunch.",
+            "He eat an apple after lunch."
+          ],
+          "explanation": "Перед гласным звуком — an, и после he глагол получает -s.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_apple"
+          ],
+          "errorCategory": "articles"
+        },
+        {
+          "id": "fv1_e6",
+          "type": "type_answer",
+          "prompt": "Переведите: рис",
+          "correctAnswer": "rice",
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_rice"
+          ],
+          "errorCategory": "vocabulary",
+          "explanation": "Rice — неисчисляемое, формы rices не существует."
+        },
+        {
+          "id": "fv1_e7",
+          "type": "multiple_choice",
+          "prompt": "The children are ___. Let's have dinner.",
+          "correctAnswer": "hungry",
+          "options": [
+            "hungry",
+            "hungrily",
+            "hunger"
+          ],
+          "explanation": "После are нужно прилагательное: are hungry.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_hungry",
+            "v_dinner"
+          ],
+          "errorCategory": "word_form"
+        }
+      ]
+    },
+    {
+      "lessonId": "fv_a1_l2",
+      "title": "В кафе",
+      "orderIndex": 2,
+      "xpReward": 25,
+      "exercises": [
+        {
+          "id": "fv2_e1",
+          "type": "multiple_choice",
+          "prompt": "Can I see the ___, please?",
+          "correctAnswer": "menu",
+          "options": [
+            "menu",
+            "money",
+            "morning"
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_menu"
+          ],
+          "errorCategory": "vocabulary",
+          "explanation": "Menu произносится [ˈmenjuː], ударение на первый слог."
+        },
+        {
+          "id": "fv2_e2",
+          "type": "multiple_choice",
+          "prompt": "A ___ of water, please.",
+          "correctAnswer": "glass",
+          "options": [
+            "glass",
+            "loaf",
+            "slice"
+          ],
+          "explanation": "A glass of water — стакан воды; a loaf of bread — буханка хлеба; a slice of cheese — ломтик сыра.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_water"
+          ],
+          "errorCategory": "collocation"
+        },
+        {
+          "id": "fv2_e3",
+          "type": "match_pairs",
+          "prompt": "Соедините слова с переводом",
+          "pairs": [
+            {
+              "id": "p1",
+              "left": "breakfast",
+              "right": "завтрак"
+            },
+            {
+              "id": "p2",
+              "left": "dinner",
+              "right": "ужин"
+            },
+            {
+              "id": "p3",
+              "left": "soup",
+              "right": "суп"
+            },
+            {
+              "id": "p4",
+              "left": "tea",
+              "right": "чай"
+            }
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_breakfast",
+            "v_dinner",
+            "v_soup",
+            "v_tea"
+          ],
+          "errorCategory": "vocabulary",
+          "explanation": "Breakfast — утром, lunch — днём, dinner — вечером."
+        },
+        {
+          "id": "fv2_e4",
+          "type": "type_answer",
+          "prompt": "Переведите: Я пью воду каждый день.",
+          "correctAnswer": "I drink water every day",
+          "acceptedAnswers": [
+            "i drink water every day."
+          ],
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_drink",
+            "v_water",
+            "v_every_day"
+          ],
+          "errorCategory": "word_order"
+        },
+        {
+          "id": "fv2_e5",
+          "type": "multiple_choice",
+          "prompt": "She ___ tea with milk.",
+          "correctAnswer": "likes",
+          "options": [
+            "likes",
+            "like",
+            "liking"
+          ],
+          "explanation": "She — третье лицо единственного числа, нужен -s.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_tea"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "fv2_e6",
+          "type": "type_answer",
+          "prompt": "Переведите: завтрак",
+          "correctAnswer": "breakfast",
+          "hint": "break + fast",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_breakfast"
+          ],
+          "errorCategory": "spelling",
+          "explanation": "Breakfast = break + fast: «прервать пост» после ночи."
+        },
+        {
+          "id": "fv2_e7",
+          "type": "multiple_choice",
+          "prompt": "Как вежливо попросить два кофе?",
+          "correctAnswer": "Two coffees, please.",
+          "options": [
+            "Two coffees, please.",
+            "Two coffees.",
+            "I want two coffees now."
+          ],
+          "explanation": "Please делает просьбу вежливой — без него звучит как приказ.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_coffee",
+            "v_please"
+          ],
+          "errorCategory": "register"
+        }
+      ]
+    }
+  ]
+}

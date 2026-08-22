@@ -1,0 +1,479 @@
+{
+  "skillKey": "present_simple_a1",
+  "cefrLevel": "A1",
+  "category": "grammar",
+  "title": "Present Simple",
+  "subtitle": "Повседневные действия и привычки",
+  "iconName": "clock.arrow.circlepath",
+  "prerequisiteKeys": [
+    "greetings_a1"
+  ],
+  "sourceStandard": "CEFR Companion Volume (A1: описание рутины) + English Grammar Profile (A1 Present Simple)",
+  "lessons": [
+    {
+      "lessonId": "ps_a1_l1",
+      "title": "Я и ты: базовая форма",
+      "orderIndex": 1,
+      "xpReward": 20,
+      "exercises": [
+        {
+          "id": "ps1_e1",
+          "type": "multiple_choice",
+          "prompt": "I ___ English every day.",
+          "correctAnswer": "study",
+          "options": [
+            "study",
+            "studies",
+            "studying"
+          ],
+          "hint": "После I глагол не меняется",
+          "explanation": "С I, you, we, they глагол стоит в базовой форме: I study.",
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_study",
+            "v_every_day"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "ps1_e2",
+          "type": "multiple_choice",
+          "prompt": "We ___ in a small city.",
+          "correctAnswer": "live",
+          "options": [
+            "live",
+            "lives",
+            "living"
+          ],
+          "explanation": "We — множественное число, окончание -s не нужно.",
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_live"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "ps1_e3",
+          "type": "type_answer",
+          "prompt": "Переведите: Они работают каждый день.",
+          "correctAnswer": "They work every day",
+          "acceptedAnswers": [
+            "they work every day."
+          ],
+          "hint": "they + базовая форма глагола",
+          "explanation": "They work — без -s, потому что подлежащее во множественном числе.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_work",
+            "v_every_day"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "ps1_e4",
+          "type": "multiple_choice",
+          "prompt": "You ___ very good books.",
+          "correctAnswer": "read",
+          "options": [
+            "read",
+            "reads",
+            "reading"
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_read"
+          ],
+          "errorCategory": "tense",
+          "explanation": "После you глагол всегда в базовой форме — и в единственном, и во множественном числе."
+        },
+        {
+          "id": "ps1_e5",
+          "type": "match_pairs",
+          "prompt": "Соедините глаголы с переводом",
+          "pairs": [
+            {
+              "id": "p1",
+              "left": "live",
+              "right": "жить"
+            },
+            {
+              "id": "p2",
+              "left": "work",
+              "right": "работать"
+            },
+            {
+              "id": "p3",
+              "left": "study",
+              "right": "учиться"
+            },
+            {
+              "id": "p4",
+              "left": "read",
+              "right": "читать"
+            }
+          ],
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_live",
+            "v_work",
+            "v_study",
+            "v_read"
+          ],
+          "errorCategory": "vocabulary",
+          "explanation": "Эти четыре глагола описывают повседневную рутину — основу Present Simple."
+        },
+        {
+          "id": "ps1_e6",
+          "type": "type_answer",
+          "prompt": "Переведите: Я пишу каждый день.",
+          "correctAnswer": "I write every day",
+          "acceptedAnswers": [
+            "i write every day."
+          ],
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_write",
+            "v_every_day"
+          ],
+          "errorCategory": "word_order",
+          "explanation": "Порядок слов: подлежащее → глагол → обстоятельство времени."
+        },
+        {
+          "id": "ps1_e7",
+          "type": "multiple_choice",
+          "prompt": "Какое предложение верное?",
+          "correctAnswer": "We speak two languages.",
+          "options": [
+            "We speak two languages.",
+            "We speaks two languages.",
+            "We speaking two languages."
+          ],
+          "explanation": "После we глагол остаётся в базовой форме.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_speak"
+          ],
+          "errorCategory": "tense"
+        }
+      ]
+    },
+    {
+      "lessonId": "ps_a1_l2",
+      "title": "He, she, it: окончание -s",
+      "orderIndex": 2,
+      "xpReward": 25,
+      "exercises": [
+        {
+          "id": "ps2_e1",
+          "type": "multiple_choice",
+          "prompt": "She ___ coffee every morning.",
+          "correctAnswer": "drinks",
+          "options": [
+            "drink",
+            "drinks",
+            "drinking"
+          ],
+          "hint": "Третье лицо единственного числа",
+          "explanation": "После he, she, it глагол получает окончание -s: she drinks.",
+          "difficulty": 1,
+          "vocabularyIds": [
+            "v_drink",
+            "v_coffee"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "ps2_e2",
+          "type": "multiple_choice",
+          "prompt": "My friend ___ in a bank.",
+          "correctAnswer": "works",
+          "options": [
+            "works",
+            "work",
+            "working"
+          ],
+          "explanation": "My friend = he/she, значит нужно works.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_work",
+            "v_friend"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "ps2_e3",
+          "type": "multiple_choice",
+          "prompt": "He ___ to school by bus.",
+          "correctAnswer": "goes",
+          "options": [
+            "goes",
+            "gos",
+            "go"
+          ],
+          "explanation": "Глаголы на -o получают -es: go → goes.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_go"
+          ],
+          "errorCategory": "spelling"
+        },
+        {
+          "id": "ps2_e4",
+          "type": "multiple_choice",
+          "prompt": "The lesson ___ at nine.",
+          "correctAnswer": "starts",
+          "options": [
+            "starts",
+            "start",
+            "starting"
+          ],
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_start"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "ps2_e5",
+          "type": "type_answer",
+          "prompt": "Переведите: Она читает.",
+          "correctAnswer": "She reads",
+          "acceptedAnswers": [
+            "she reads."
+          ],
+          "explanation": "She + reads — не забывайте -s.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_read"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "ps2_e6",
+          "type": "match_pairs",
+          "prompt": "Соедините глаголы с переводом",
+          "pairs": [
+            {
+              "id": "p1",
+              "left": "have",
+              "right": "иметь"
+            },
+            {
+              "id": "p2",
+              "left": "watch",
+              "right": "смотреть"
+            },
+            {
+              "id": "p3",
+              "left": "go",
+              "right": "идти, ехать"
+            },
+            {
+              "id": "p4",
+              "left": "speak",
+              "right": "говорить"
+            }
+          ],
+          "explanation": "Это самые частые неправильные в 3-м лице глаголы: has, watches, goes, speaks.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_have",
+            "v_watch",
+            "v_go",
+            "v_speak"
+          ],
+          "errorCategory": "tense"
+        },
+        {
+          "id": "ps2_e7",
+          "type": "multiple_choice",
+          "prompt": "Какое предложение верное?",
+          "correctAnswer": "My teacher speaks slowly.",
+          "options": [
+            "My teacher speaks slowly.",
+            "My teacher speak slowly.",
+            "My teacher speaking slowly."
+          ],
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_teacher",
+            "v_speak"
+          ],
+          "errorCategory": "tense",
+          "explanation": "My teacher = he/she, поэтому speaks. Форма speaking без is не употребляется."
+        },
+        {
+          "id": "ps2_e8",
+          "type": "type_answer",
+          "prompt": "Переведите: обычно",
+          "correctAnswer": "usually",
+          "hint": "Наречие частотности, ставится перед глаголом",
+          "explanation": "We usually have tea at five. Usually стоит перед основным глаголом.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_usually"
+          ],
+          "errorCategory": "spelling"
+        }
+      ]
+    },
+    {
+      "lessonId": "ps_a1_l3",
+      "title": "Отрицание и вопрос",
+      "orderIndex": 3,
+      "xpReward": 25,
+      "exercises": [
+        {
+          "id": "ps3_e1",
+          "type": "multiple_choice",
+          "prompt": "I ___ like cold soup.",
+          "correctAnswer": "do not",
+          "options": [
+            "do not",
+            "does not",
+            "am not"
+          ],
+          "explanation": "С I, you, we, they отрицание строится через do not (don't).",
+          "difficulty": 2,
+          "vocabularyIds": [],
+          "errorCategory": "negation"
+        },
+        {
+          "id": "ps3_e2",
+          "type": "multiple_choice",
+          "prompt": "She ___ drink tea in the evening.",
+          "correctAnswer": "does not",
+          "options": [
+            "does not",
+            "do not",
+            "not"
+          ],
+          "explanation": "С he, she, it — does not (doesn't), при этом глагол теряет -s.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_drink",
+            "v_tea"
+          ],
+          "errorCategory": "negation"
+        },
+        {
+          "id": "ps3_e3",
+          "type": "multiple_choice",
+          "prompt": "___ you live in Kyiv?",
+          "correctAnswer": "Do",
+          "options": [
+            "Do",
+            "Does",
+            "Are"
+          ],
+          "explanation": "Вопрос с you начинается с Do.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_live"
+          ],
+          "errorCategory": "question_form"
+        },
+        {
+          "id": "ps3_e4",
+          "type": "multiple_choice",
+          "prompt": "___ your brother work here?",
+          "correctAnswer": "Does",
+          "options": [
+            "Does",
+            "Do",
+            "Is"
+          ],
+          "explanation": "Your brother = he, значит вопрос начинается с Does, а глагол без -s.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_work"
+          ],
+          "errorCategory": "question_form"
+        },
+        {
+          "id": "ps3_e5",
+          "type": "multiple_choice",
+          "prompt": "Какое предложение верное?",
+          "correctAnswer": "He does not eat bread.",
+          "options": [
+            "He does not eat bread.",
+            "He does not eats bread.",
+            "He not eat bread."
+          ],
+          "explanation": "После does not глагол стоит в базовой форме.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_eat"
+          ],
+          "errorCategory": "negation"
+        },
+        {
+          "id": "ps3_e6",
+          "type": "type_answer",
+          "prompt": "Переведите: Я не работаю по воскресеньям.",
+          "correctAnswer": "I do not work on Sundays",
+          "acceptedAnswers": [
+            "i don't work on sundays",
+            "I dont work on Sundays"
+          ],
+          "hint": "do not = don't",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_work"
+          ],
+          "errorCategory": "negation",
+          "explanation": "Don't — сокращение do not, оба варианта верны."
+        },
+        {
+          "id": "ps3_e8",
+          "type": "multiple_choice",
+          "prompt": "Какое предложение верное?",
+          "correctAnswer": "She never drinks coffee at night.",
+          "options": [
+            "She never drinks coffee at night.",
+            "She drinks never coffee at night.",
+            "Never she drinks coffee at night."
+          ],
+          "explanation": "Never — наречие частотности: место перед основным глаголом. Второе отрицание при этом не нужно.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_never",
+            "v_drink",
+            "v_coffee"
+          ],
+          "errorCategory": "word_order"
+        },
+        {
+          "id": "ps3_e7",
+          "type": "match_pairs",
+          "prompt": "Соедините вопрос с ответом",
+          "pairs": [
+            {
+              "id": "p1",
+              "left": "Do you read books?",
+              "right": "Yes, I do."
+            },
+            {
+              "id": "p2",
+              "left": "Does she work here?",
+              "right": "Yes, she does."
+            },
+            {
+              "id": "p3",
+              "left": "Do they speak English?",
+              "right": "No, they do not."
+            }
+          ],
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_read",
+            "v_work",
+            "v_speak"
+          ],
+          "errorCategory": "question_form",
+          "explanation": "Краткий ответ повторяет вспомогательный глагол вопроса: Do → do, Does → does."
+        }
+      ]
+    }
+  ]
+}

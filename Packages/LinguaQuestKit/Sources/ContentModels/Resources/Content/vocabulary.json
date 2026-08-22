@@ -1,0 +1,371 @@
+[
+  {
+    "itemId": "v_hello",
+    "word": "hello",
+    "translation": "привет, здравствуйте",
+    "partOfSpeech": "exclamation",
+    "cefrLevel": "A1",
+    "exampleSentence": "Hello, my name is Anna.",
+    "exampleTranslation": "Здравствуйте, меня зовут Анна."
+  },
+  {
+    "itemId": "v_goodbye",
+    "word": "goodbye",
+    "translation": "до свидания",
+    "partOfSpeech": "exclamation",
+    "cefrLevel": "A1",
+    "exampleSentence": "Goodbye, see you tomorrow.",
+    "exampleTranslation": "До свидания, увидимся завтра."
+  },
+  {
+    "itemId": "v_name",
+    "word": "name",
+    "translation": "имя",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "What is your name?",
+    "exampleTranslation": "Как тебя зовут?"
+  },
+  {
+    "itemId": "v_please",
+    "word": "please",
+    "translation": "пожалуйста (просьба)",
+    "partOfSpeech": "adverb",
+    "cefrLevel": "A1",
+    "exampleSentence": "Two coffees, please.",
+    "exampleTranslation": "Два кофе, пожалуйста."
+  },
+  {
+    "itemId": "v_thank_you",
+    "word": "thank you",
+    "translation": "спасибо",
+    "partOfSpeech": "phrase",
+    "cefrLevel": "A1",
+    "exampleSentence": "Thank you for the book.",
+    "exampleTranslation": "Спасибо за книгу."
+  },
+  {
+    "itemId": "v_morning",
+    "word": "morning",
+    "translation": "утро",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "Good morning!",
+    "exampleTranslation": "Доброе утро!"
+  },
+  {
+    "itemId": "v_evening",
+    "word": "evening",
+    "translation": "вечер",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "Good evening, everyone.",
+    "exampleTranslation": "Добрый вечер всем."
+  },
+  {
+    "itemId": "v_friend",
+    "word": "friend",
+    "translation": "друг, подруга",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "My friend lives in Kyiv.",
+    "exampleTranslation": "Мой друг живёт в Киеве."
+  },
+  {
+    "itemId": "v_teacher",
+    "word": "teacher",
+    "translation": "учитель",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "Our teacher speaks slowly.",
+    "exampleTranslation": "Наш учитель говорит медленно."
+  },
+  {
+    "itemId": "v_student",
+    "word": "student",
+    "translation": "студент, ученик",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "She is a student.",
+    "exampleTranslation": "Она студентка."
+  },
+  {
+    "itemId": "v_nice",
+    "word": "nice",
+    "translation": "приятный, милый",
+    "partOfSpeech": "adjective",
+    "cefrLevel": "A1",
+    "exampleSentence": "Nice to meet you.",
+    "exampleTranslation": "Приятно познакомиться."
+  },
+  {
+    "itemId": "v_sorry",
+    "word": "sorry",
+    "translation": "извините",
+    "partOfSpeech": "exclamation",
+    "cefrLevel": "A1",
+    "exampleSentence": "Sorry, I am late.",
+    "exampleTranslation": "Извините, я опоздал."
+  },
+  {
+    "itemId": "v_live",
+    "word": "live",
+    "translation": "жить",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "They live near the park.",
+    "exampleTranslation": "Они живут рядом с парком."
+  },
+  {
+    "itemId": "v_work",
+    "word": "work",
+    "translation": "работать",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "He works in a small shop.",
+    "exampleTranslation": "Он работает в маленьком магазине."
+  },
+  {
+    "itemId": "v_study",
+    "word": "study",
+    "translation": "учиться, изучать",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "We study English every day.",
+    "exampleTranslation": "Мы учим английский каждый день."
+  },
+  {
+    "itemId": "v_read",
+    "word": "read",
+    "translation": "читать",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "She reads before bed.",
+    "exampleTranslation": "Она читает перед сном."
+  },
+  {
+    "itemId": "v_write",
+    "word": "write",
+    "translation": "писать",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "I write emails at work.",
+    "exampleTranslation": "Я пишу письма на работе."
+  },
+  {
+    "itemId": "v_go",
+    "word": "go",
+    "translation": "идти, ехать",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "He goes to school by bus.",
+    "exampleTranslation": "Он ездит в школу на автобусе."
+  },
+  {
+    "itemId": "v_have",
+    "word": "have",
+    "translation": "иметь",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "We have two cats.",
+    "exampleTranslation": "У нас две кошки."
+  },
+  {
+    "itemId": "v_watch",
+    "word": "watch",
+    "translation": "смотреть",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "They watch films on Fridays.",
+    "exampleTranslation": "Они смотрят фильмы по пятницам."
+  },
+  {
+    "itemId": "v_speak",
+    "word": "speak",
+    "translation": "говорить",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "My sister speaks two languages.",
+    "exampleTranslation": "Моя сестра говорит на двух языках."
+  },
+  {
+    "itemId": "v_start",
+    "word": "start",
+    "translation": "начинать",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "The lesson starts at nine.",
+    "exampleTranslation": "Урок начинается в девять."
+  },
+  {
+    "itemId": "v_every_day",
+    "word": "every day",
+    "translation": "каждый день",
+    "partOfSpeech": "phrase",
+    "cefrLevel": "A1",
+    "exampleSentence": "I walk to work every day.",
+    "exampleTranslation": "Я хожу на работу пешком каждый день."
+  },
+  {
+    "itemId": "v_usually",
+    "word": "usually",
+    "translation": "обычно",
+    "partOfSpeech": "adverb",
+    "cefrLevel": "A1",
+    "exampleSentence": "We usually have tea at five.",
+    "exampleTranslation": "Мы обычно пьём чай в пять."
+  },
+  {
+    "itemId": "v_never",
+    "word": "never",
+    "translation": "никогда",
+    "partOfSpeech": "adverb",
+    "cefrLevel": "A1",
+    "exampleSentence": "She never drinks coffee at night.",
+    "exampleTranslation": "Она никогда не пьёт кофе ночью."
+  },
+  {
+    "itemId": "v_water",
+    "word": "water",
+    "translation": "вода",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "A glass of water, please.",
+    "exampleTranslation": "Стакан воды, пожалуйста."
+  },
+  {
+    "itemId": "v_bread",
+    "word": "bread",
+    "translation": "хлеб",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "We buy bread in the morning.",
+    "exampleTranslation": "Мы покупаем хлеб утром."
+  },
+  {
+    "itemId": "v_apple",
+    "word": "apple",
+    "translation": "яблоко",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "He eats an apple after lunch.",
+    "exampleTranslation": "Он ест яблоко после обеда."
+  },
+  {
+    "itemId": "v_coffee",
+    "word": "coffee",
+    "translation": "кофе",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "She drinks coffee every morning.",
+    "exampleTranslation": "Она пьёт кофе каждое утро."
+  },
+  {
+    "itemId": "v_tea",
+    "word": "tea",
+    "translation": "чай",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "I like tea with milk.",
+    "exampleTranslation": "Я люблю чай с молоком."
+  },
+  {
+    "itemId": "v_milk",
+    "word": "milk",
+    "translation": "молоко",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "There is no milk in the fridge.",
+    "exampleTranslation": "В холодильнике нет молока."
+  },
+  {
+    "itemId": "v_egg",
+    "word": "egg",
+    "translation": "яйцо",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "Two eggs for breakfast, please.",
+    "exampleTranslation": "Два яйца на завтрак, пожалуйста."
+  },
+  {
+    "itemId": "v_cheese",
+    "word": "cheese",
+    "translation": "сыр",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "This cheese is very good.",
+    "exampleTranslation": "Этот сыр очень хороший."
+  },
+  {
+    "itemId": "v_soup",
+    "word": "soup",
+    "translation": "суп",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "The soup is hot.",
+    "exampleTranslation": "Суп горячий."
+  },
+  {
+    "itemId": "v_rice",
+    "word": "rice",
+    "translation": "рис",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "We often cook rice.",
+    "exampleTranslation": "Мы часто готовим рис."
+  },
+  {
+    "itemId": "v_breakfast",
+    "word": "breakfast",
+    "translation": "завтрак",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "Breakfast is at eight.",
+    "exampleTranslation": "Завтрак в восемь."
+  },
+  {
+    "itemId": "v_dinner",
+    "word": "dinner",
+    "translation": "ужин",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "We have dinner together.",
+    "exampleTranslation": "Мы ужинаем вместе."
+  },
+  {
+    "itemId": "v_eat",
+    "word": "eat",
+    "translation": "есть, кушать",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "They eat fish on Fridays.",
+    "exampleTranslation": "Они едят рыбу по пятницам."
+  },
+  {
+    "itemId": "v_drink",
+    "word": "drink",
+    "translation": "пить",
+    "partOfSpeech": "verb",
+    "cefrLevel": "A1",
+    "exampleSentence": "I drink water after sport.",
+    "exampleTranslation": "Я пью воду после спорта."
+  },
+  {
+    "itemId": "v_hungry",
+    "word": "hungry",
+    "translation": "голодный",
+    "partOfSpeech": "adjective",
+    "cefrLevel": "A1",
+    "exampleSentence": "The children are hungry.",
+    "exampleTranslation": "Дети голодные."
+  },
+  {
+    "itemId": "v_menu",
+    "word": "menu",
+    "translation": "меню",
+    "partOfSpeech": "noun",
+    "cefrLevel": "A1",
+    "exampleSentence": "Can I see the menu?",
+    "exampleTranslation": "Можно посмотреть меню?"
+  }
+]

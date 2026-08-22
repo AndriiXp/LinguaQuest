@@ -1,0 +1,9 @@
+{
+  "contentVersion": 1,
+  "skillFiles": [
+    "skill_greetings_a1",
+    "skill_present_simple_a1",
+    "skill_food_vocab_a1"
+  ],
+  "vocabularyFile": "vocabulary"
+}
