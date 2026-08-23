@@ -84,8 +84,11 @@ jobs:
             echo "- Запуск: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             echo
             if [ -f build/LinguaQuest-unsigned.ipa ]; then
-              echo "IPA готов ($(du -h build/LinguaQuest-unsigned.ipa | cut -f1)):"
-              echo "скачай артефакт \`LinguaQuest-ipa\` со страницы запуска и установи через Sideloadly."
+              echo "IPA готов ($(du -h build/LinguaQuest-unsigned.ipa | cut -f1))."
+              echo
+              echo "Постоянная ссылка (открывается без входа в GitHub, всегда свежая сборка):"
+              echo "${{ github.server_url }}/${{ github.repository }}/releases/download/latest/LinguaQuest.ipa"
+              echo
               echo "Инструкция: \`Docs/deploy-to-iphone.md\`"
             else
               echo '## Ошибки архива'
@@ -119,6 +122,30 @@ jobs:
           name: LinguaQuest-ipa
           path: build/LinguaQuest-unsigned.ipa
           retention-days: 30
+
+      # Артефакт Actions скачивается только со входом в GitHub, а релиз — публично
+      # и по неизменной ссылке. Это нужно, чтобы ставить приложение прямо с телефона.
+      - name: Опубликовать как «последняя сборка»
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp build/LinguaQuest-unsigned.ipa build/LinguaQuest.ipa
+          NOTES="Сборка #${{ github.run_number }} · коммит ${GITHUB_SHA::7} · $(date -u '+%Y-%m-%d %H:%M UTC')
+
+          Неподписанный IPA. Установка: Sideloadly или AltStore, инструкция в Docs/deploy-to-iphone.md.
+          Ссылка постоянная — всегда указывает на свежую сборку."
+
+          if gh release view latest >/dev/null 2>&1; then
+            gh release edit latest --notes "$NOTES" --title "Последняя сборка (#${{ github.run_number }})"
+            gh release upload latest build/LinguaQuest.ipa --clobber
+          else
+            gh release create latest build/LinguaQuest.ipa \
+              --title "Последняя сборка (#${{ github.run_number }})" \
+              --notes "$NOTES" \
+              --prerelease
+          fi
+          echo "Постоянная ссылка: ${{ github.server_url }}/${{ github.repository }}/releases/download/latest/LinguaQuest.ipa"
 
       - name: Лог архива
         if: failure()
