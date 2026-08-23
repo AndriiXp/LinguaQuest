@@ -1,7 +1,14 @@
-# Сборка #13 — success
+# Сборка #14 — failure
 
-- Коммит: `e093f16ae1b38889384ff03e39863d8ff2c3824b`
-- Время: 2026-08-23 12:21 UTC
-- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32638991125
+- Коммит: `4250f71af54a7796618aae149a6a3bc53612b8e6`
+- Время: 2026-08-23 13:30 UTC
+- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32642515664
 
-Сборка и тесты прошли. Можно запускать «Сборка IPA для телефона».
+## Ошибки компиляции
+```
+/Users/runner/work/LinguaQuest/LinguaQuest/Packages/LinguaQuestKit/Sources/SpeechKit/SpeechRecorder.swift:177:16: error: cannot convert return expression of type 'Float' to return type 'Double'
+```
+
+## Упавшие тесты
+```
+```
