@@ -26,6 +26,8 @@ public final class GameStore {
     /// Сколько карточек назначено на сегодня. Кэш, а не запрос из тела вью:
     /// иначе SwiftData-фетч выполнялся бы на каждую перерисовку экрана.
     public private(set) var dueCardsCount = 0
+    /// Достижения, открывшиеся последним уроком — экран итогов показывает их.
+    public private(set) var newlyUnlockedAchievements: [AchievementDefinition] = []
 
     private let context: ModelContext
     private let now: () -> Date
@@ -43,6 +45,8 @@ public final class GameStore {
         refreshDailyCounters()
         refreshStreak()
         refreshDueCardsCount()
+        syncAchievements()
+        save()
     }
 
     /// Пересчитывает кэш карточек к повторению. Вызывается после урока
@@ -219,7 +223,9 @@ public final class GameStore {
     public func apply(summary: LessonSummary) {
         didLevelUp = false
         newlyUnlockedAvatars = []
+        newlyUnlockedAchievements = []
         refreshDailyCounters()
+        let statsBefore = achievementStats()
 
         let progress = lessonProgress(for: summary.lessonId)
         progress?.attemptsCount += 1
@@ -258,6 +264,9 @@ public final class GameStore {
         profile.todayXP += summary.xpEarned
         profile.coins += summary.coinsEarned
         profile.level = Progression.level(forTotalXP: profile.xpTotal)
+        profile.lessonsCompletedTotal += 1
+        if summary.isPerfect { profile.perfectLessonsTotal += 1 }
+        recordActivity(xp: summary.xpEarned, at: summary.completedAt)
 
         if let node = skillNode(for: summary.skillKey) {
             node.xpEarned += summary.xpEarned
@@ -289,6 +298,12 @@ public final class GameStore {
 
         save()
         refreshDueCardsCount()
+
+        // Достижения считаются последними: к этому моменту все счётчики обновлены.
+        let statsAfter = achievementStats()
+        newlyUnlockedAchievements = AchievementCatalog.newlyUnlocked(before: statsBefore, after: statsAfter)
+        syncAchievements(stats: statsAfter)
+        save()
     }
 
     private func unlockNextLesson(after lessonId: String, in skillKey: String) {
@@ -389,6 +404,85 @@ public final class GameStore {
             sortBy: [SortDescriptor(\.nextReviewDate)]
         )
         return (try? context.fetch(descriptor)) ?? []
+    }
+
+    // MARK: - Достижения и календарь активности
+
+    /// Снимок счётчиков для расчёта достижений.
+    public func achievementStats() -> AchievementStats {
+        let nodes = allSkillNodes()
+        return AchievementStats(
+            streak: profile.streakCount,
+            lessonsCompleted: profile.lessonsCompletedTotal,
+            perfectLessons: profile.perfectLessonsTotal,
+            totalXP: profile.xpTotal,
+            wordsLearned: allCards().count,
+            crowns: nodes.reduce(0) { $0 + $1.masteryLevel },
+            skillsUnlocked: nodes.filter(\.isUnlocked).count
+        )
+    }
+
+    /// Приводит записи достижений в базе в соответствие с текущими счётчиками.
+    public func syncAchievements(stats: AchievementStats? = nil) {
+        let stats = stats ?? achievementStats()
+        let existing = (try? context.fetch(FetchDescriptor<Achievement>())) ?? []
+        var byKey = Dictionary(existing.map { ($0.achievementKey, $0) }, uniquingKeysWith: { first, _ in first })
+
+        for definition in AchievementCatalog.all {
+            let (value, isUnlocked) = AchievementCatalog.progress(for: definition, stats: stats)
+
+            let record: Achievement
+            if let found = byKey[definition.id] {
+                record = found
+            } else {
+                record = Achievement(achievementKey: definition.id, progress: 0, target: definition.target)
+                context.insert(record)
+                byKey[definition.id] = record
+            }
+
+            record.progress = value
+            record.target = definition.target
+            if isUnlocked && record.unlockedAt == nil {
+                record.unlockedAt = now()
+                AppLog.persistence.info("Достижение открыто: \(definition.id)")
+            }
+        }
+    }
+
+    /// Все достижения с их описаниями — для экрана профиля.
+    public func achievements() -> [(definition: AchievementDefinition, record: Achievement?)] {
+        let stored = (try? context.fetch(FetchDescriptor<Achievement>())) ?? []
+        let byKey = Dictionary(stored.map { ($0.achievementKey, $0) }, uniquingKeysWith: { first, _ in first })
+        return AchievementCatalog.all.map { ($0, byKey[$0.id]) }
+    }
+
+    /// Отмечает занятие в календаре активности.
+    private func recordActivity(xp: Int, at date: Date) {
+        let day = Calendar.current.startOfDay(for: date)
+        let descriptor = FetchDescriptor<DailyActivity>(predicate: #Predicate { $0.day == day })
+
+        if let existing = try? context.fetch(descriptor).first {
+            existing.xpEarned += xp
+            existing.lessonsCompleted += 1
+        } else {
+            context.insert(DailyActivity(day: day, xpEarned: xp, lessonsCompleted: 1))
+        }
+    }
+
+    /// Активность за последние `days` дней: день → набранный XP.
+    /// Дни без занятий в словаре отсутствуют — календарь рисует их пустыми.
+    public func activityMap(days: Int = 91, endingAt date: Date? = nil) -> [Date: Int] {
+        let calendar = Calendar.current
+        let end = calendar.startOfDay(for: date ?? now())
+        guard let start = calendar.date(byAdding: .day, value: -(days - 1), to: end) else { return [:] }
+
+        let descriptor = FetchDescriptor<DailyActivity>(predicate: #Predicate { $0.day >= start })
+        let records = (try? context.fetch(descriptor)) ?? []
+        return Dictionary(records.map { ($0.day, $0.xpEarned) }, uniquingKeysWith: { a, b in a + b })
+    }
+
+    private func allCards() -> [SRSCard] {
+        (try? context.fetch(FetchDescriptor<SRSCard>())) ?? []
     }
 
     // MARK: - Аватары

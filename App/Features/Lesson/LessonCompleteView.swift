@@ -19,6 +19,7 @@ struct LessonCompleteView: View {
             VStack(spacing: DS.Spacing.lg) {
                 header
                 rewards
+                achievementsBanner
                 if !summary.mistakes.isEmpty {
                     mistakesBreakdown
                 }
@@ -124,6 +125,49 @@ struct LessonCompleteView: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(title): \(value)")
+    }
+
+    // MARK: - Новые достижения
+
+    @ViewBuilder
+    private var achievementsBanner: some View {
+        let unlocked = store.newlyUnlockedAchievements
+        if !unlocked.isEmpty {
+            VStack(alignment: .leading, spacing: DS.Spacing.sm) {
+                Text(unlocked.count == 1 ? "Новое достижение" : "Новые достижения")
+                    .font(DS.Typography.headline)
+                    .foregroundStyle(DS.Colors.textPrimary)
+
+                ForEach(unlocked) { achievement in
+                    HStack(spacing: DS.Spacing.sm) {
+                        ZStack {
+                            Circle()
+                                .fill(DS.Colors.tint(achievement.tintKey).opacity(0.18))
+                            Image(systemName: achievement.symbolName)
+                                .foregroundStyle(DS.Colors.tint(achievement.tintKey))
+                        }
+                        .frame(width: 44, height: 44)
+
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(achievement.title)
+                                .font(DS.Typography.bodyBold)
+                                .foregroundStyle(DS.Colors.textPrimary)
+                            Text(achievement.detail)
+                                .font(DS.Typography.caption)
+                                .foregroundStyle(DS.Colors.textSecondary)
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .padding(DS.Spacing.sm)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: DS.Radius.md, style: .continuous)
+                            .fill(DS.Colors.surface)
+                    )
+                }
+            }
+            .transition(.scale.combined(with: .opacity))
+        }
     }
 
     // MARK: - Разбор ошибок

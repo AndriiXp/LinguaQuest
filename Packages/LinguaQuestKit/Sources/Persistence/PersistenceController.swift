@@ -13,7 +13,8 @@ public enum PersistenceController {
         LessonProgress.self,
         MistakeRecord.self,
         SRSCard.self,
-        Achievement.self
+        Achievement.self,
+        DailyActivity.self
     ])
 
     /// - Parameter inMemory: true для превью и тестов — база живёт только в памяти.

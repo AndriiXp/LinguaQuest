@@ -37,6 +37,23 @@ public enum DS {
         public static let textSecondary = Color.dynamic(light: "#5B6079", dark: "#A6AAC8")
         public static let textOnPrimary = Color.dynamic(light: "#FFFFFF", dark: "#0F1020")
 
+        /// Цвет по строковому ключу — нужен там, где оттенок задан данными,
+        /// а не кодом (например, в каталоге достижений).
+        public static func tint(_ key: String) -> Color {
+            switch key {
+            case "primary": return primary
+            case "success": return success
+            case "danger": return danger
+            case "warning": return warning
+            case "xp": return xp
+            case "coin": return coin
+            case "gem": return gem
+            case "heart": return heart
+            case "streak": return streak
+            default: return textSecondary
+            }
+        }
+
         // Категории дерева навыков
         public static func category(_ key: String) -> Color {
             switch key {

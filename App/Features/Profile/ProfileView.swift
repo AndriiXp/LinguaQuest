@@ -16,6 +16,8 @@ struct ProfileView: View {
             VStack(spacing: DS.Spacing.lg) {
                 avatarHeader
                 statsGrid
+                activitySection
+                achievementsSection
                 skillSummary
             }
             .padding(DS.Spacing.md)
@@ -112,6 +114,80 @@ struct ProfileView: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(title): \(value)")
+    }
+
+    private var activitySection: some View {
+        VStack(alignment: .leading, spacing: DS.Spacing.sm) {
+            HStack {
+                Text("Календарь занятий")
+                    .font(DS.Typography.headline)
+                    .foregroundStyle(DS.Colors.textPrimary)
+                Spacer()
+                Text("\(activeDays) \(dayWord(activeDays))")
+                    .font(DS.Typography.caption)
+                    .foregroundStyle(DS.Colors.textSecondary)
+            }
+            ActivityCalendar(activity: activity, dailyGoal: store.profile.dailyGoalXP)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(DS.Spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: DS.Radius.lg, style: .continuous)
+                .fill(DS.Colors.surface)
+        )
+    }
+
+    private var achievementsSection: some View {
+        let items = store.achievements()
+        let unlocked = items.filter { $0.record?.isUnlocked == true }.count
+
+        return VStack(alignment: .leading, spacing: DS.Spacing.md) {
+            HStack {
+                Text("Достижения")
+                    .font(DS.Typography.headline)
+                    .foregroundStyle(DS.Colors.textPrimary)
+                Spacer()
+                Text("\(unlocked) из \(items.count)")
+                    .font(DS.Typography.caption)
+                    .foregroundStyle(DS.Colors.textSecondary)
+                    .monospacedDigit()
+            }
+
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 84), spacing: DS.Spacing.sm)], spacing: DS.Spacing.md) {
+                ForEach(items, id: \.definition.id) { item in
+                    AchievementBadge(
+                        definition: item.definition,
+                        progress: item.record?.progress ?? 0,
+                        isUnlocked: item.record?.isUnlocked ?? false
+                    )
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(DS.Spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: DS.Radius.lg, style: .continuous)
+                .fill(DS.Colors.surface)
+        )
+    }
+
+    private var activity: [Date: Int] {
+        store.activityMap()
+    }
+
+    private var activeDays: Int {
+        activity.values.filter { $0 > 0 }.count
+    }
+
+    private func dayWord(_ count: Int) -> String {
+        let hundred = count % 100
+        let ten = count % 10
+        if (11...14).contains(hundred) { return "дней" }
+        switch ten {
+        case 1: return "день"
+        case 2, 3, 4: return "дня"
+        default: return "дней"
+        }
     }
 
     private var skillSummary: some View {

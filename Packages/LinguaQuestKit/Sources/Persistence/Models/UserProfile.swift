@@ -29,6 +29,11 @@ public final class UserProfile {
     public var todayXP: Int
     public var todayXPDate: Date
 
+    /// Накопительные счётчики для достижений. Отдельно от статусов уроков,
+    /// потому что при получении короны уроки открываются заново и их статусы сбрасываются.
+    public var lessonsCompletedTotal: Int
+    public var perfectLessonsTotal: Int
+
     public var selectedAvatarId: String
     public var createdAt: Date
 
@@ -54,6 +59,8 @@ public final class UserProfile {
         dailyGoalXP: Int = 20,
         todayXP: Int = 0,
         todayXPDate: Date = Date(),
+        lessonsCompletedTotal: Int = 0,
+        perfectLessonsTotal: Int = 0,
         selectedAvatarId: String = "fox",
         createdAt: Date = Date(),
         settings: UserSettings? = nil,
@@ -74,6 +81,8 @@ public final class UserProfile {
         self.dailyGoalXP = dailyGoalXP
         self.todayXP = todayXP
         self.todayXPDate = todayXPDate
+        self.lessonsCompletedTotal = lessonsCompletedTotal
+        self.perfectLessonsTotal = perfectLessonsTotal
         self.selectedAvatarId = selectedAvatarId
         self.createdAt = createdAt
         self.settings = settings
