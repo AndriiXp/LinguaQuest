@@ -14,8 +14,12 @@ on:
 jobs:
   ipa:
     name: Неподписанный IPA
-    runs-on: macos-15
+    runs-on: macos-latest
     timeout-minutes: 40
+    # Отчёт о сборке кладётся в сам репозиторий: логи Actions требуют
+    # авторизации, а файл в публичном репозитории читается свободно.
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -40,15 +44,22 @@ jobs:
       - name: Архив без подписи
         run: |
           set -o pipefail
+          # Пустые DEVELOPMENT_TEAM и PROVISIONING_PROFILE обязательны:
+          # без них Xcode всё равно ищет сертификат и падает на архиве.
           xcodebuild archive \
             -project LinguaQuest.xcodeproj \
             -scheme LinguaQuest \
             -configuration Release \
             -archivePath build/LinguaQuest.xcarchive \
             -destination 'generic/platform=iOS' \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
             CODE_SIGN_IDENTITY="" \
+            CODE_SIGN_ENTITLEMENTS="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
+            DEVELOPMENT_TEAM="" \
+            PROVISIONING_PROFILE_SPECIFIER="" \
             2>&1 | tee archive.log
 
       - name: Упаковать .app в .ipa
@@ -64,18 +75,42 @@ jobs:
       - name: Отчёт
         if: always()
         run: |
+          mkdir -p ci-status
           {
-            echo "### Сборка ${{ github.run_number }}"
+            echo "# Сборка IPA #${{ github.run_number }} — ${{ job.status }}"
+            echo
+            echo "- Коммит: \`${{ github.sha }}\`"
+            echo "- Время: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo "- Запуск: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo
             if [ -f build/LinguaQuest-unsigned.ipa ]; then
-              echo "IPA готов: скачай артефакт \`LinguaQuest-ipa\` ниже и установи через Sideloadly."
+              echo "IPA готов ($(du -h build/LinguaQuest-unsigned.ipa | cut -f1)):"
+              echo "скачай артефакт \`LinguaQuest-ipa\` со страницы запуска и установи через Sideloadly."
               echo "Инструкция: \`Docs/deploy-to-iphone.md\`"
             else
-              echo "Сборка упала. Ошибки:"
+              echo '## Ошибки архива'
               echo '```'
-              grep -E "error:" archive.log | head -40 || true
+              grep -E "error:|The following build commands failed|Command .* failed" archive.log 2>/dev/null \
+                | sort -u | head -40 || echo "(шаблон error: не сработал)"
+              echo '```'
+              echo
+              echo '## Хвост лога'
+              echo '```'
+              tail -40 archive.log 2>/dev/null || echo "(лога нет)"
               echo '```'
             fi
-          } >> "$GITHUB_STEP_SUMMARY"
+          } | tee -a "$GITHUB_STEP_SUMMARY" > ci-status/last-ipa.md
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Тег указывает на коммит, а отчёт нужен в main.
+          git fetch origin main
+          git checkout -B main origin/main
+          cp ci-status/last-ipa.md /tmp/last-ipa.md
+          mkdir -p ci-status && cp /tmp/last-ipa.md ci-status/last-ipa.md
+          git add ci-status/last-ipa.md
+          git commit -m "CI: результат сборки IPA #${{ github.run_number }} [skip ci]" || exit 0
+          git push origin main || echo "Отчёт не записан — не критично"
 
       - name: Загрузить IPA
         if: success()
