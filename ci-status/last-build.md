@@ -1,12 +1,13 @@
-# Сборка #2 — failure
+# Сборка #3 — failure
 
-- Коммит: `edc6a436010a71170dca0e384965d7cd7bc05fa9`
-- Время: 2026-08-23 08:28 UTC
-- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32628321450
+- Коммит: `e71eaf97a2c144c6db800db47942fba762298f58`
+- Время: 2026-08-23 09:19 UTC
+- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32630614442
 
 ## Ошибки компиляции
 ```
-/Users/runner/work/LinguaQuest/LinguaQuest/Packages/LinguaQuestKit/Sources/ContentModels/Loading/BundledContentSource.swift:10:35: error: static property 'module' is internal and cannot be referenced from a default argument value
+/Users/runner/work/LinguaQuest/LinguaQuest/Packages/LinguaQuestKit/Sources/Persistence/GameStore.swift:7:8: error: unable to resolve module dependency: 'LessonEngine'
+/Users/runner/work/LinguaQuest/LinguaQuest/Packages/LinguaQuestKit/Sources/Persistence/GameStore.swift:7:8: error: Unable to resolve module dependency: 'LessonEngine'
 ```
 
 ## Упавшие тесты
