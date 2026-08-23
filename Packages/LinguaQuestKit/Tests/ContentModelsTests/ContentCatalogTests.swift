@@ -139,12 +139,15 @@ final class ContentCatalogTests: XCTestCase {
     }
 
     func testUnimplementedExerciseTypesAreSkipped() throws {
+        // listening ждёт Спринта 4 — задание должно отфильтроваться при загрузке.
+        // Когда тип реализуют, этот тест упадёт и напомнит обновить проверку.
         let future = Exercise(
             id: "future",
-            type: .wordOrder,
-            prompt: "Соберите предложение",
-            correctAnswer: "I read books",
-            tokens: ["I", "read", "books"]
+            type: .listening,
+            prompt: "Прослушайте и выберите",
+            correctAnswer: "water",
+            options: ["water", "bread"],
+            audioText: "water"
         )
         let good = Exercise(id: "good", type: .typeAnswer, prompt: "Переведите", correctAnswer: "water")
         let skill = SkillContent(
