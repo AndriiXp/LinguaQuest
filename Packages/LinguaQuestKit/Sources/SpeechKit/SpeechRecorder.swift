@@ -173,7 +173,9 @@ public final class SpeechRecorder {
         let rms = (sum / Float(count)).squareRoot()
 
         // Логарифмическая шкала: линейная почти не шевелится при обычной речи.
+        // Считаем в Float (тип буфера), наружу отдаём Double.
         let decibels = 20 * log10(max(rms, 0.000_001))
-        return min(1, max(0, (decibels + 50) / 50))
+        let normalized = min(1, max(0, (decibels + 50) / 50))
+        return Double(normalized)
     }
 }
