@@ -30,10 +30,9 @@ let package = Package(
             resources: [.copy("Resources/Content")]
         ),
 
-        // Алгоритм интервального повтора SM-2. Чистая логика, без UI.
+        // Алгоритм интервального повтора SM-2. Чистая логика, без UI и без зависимостей.
         .target(
             name: "SRSEngine",
-            dependencies: ["Core"],
             path: "Sources/SRSEngine"
         ),
 
@@ -44,10 +43,11 @@ let package = Package(
             path: "Sources/LessonEngine"
         ),
 
-        // SwiftData-модели и репозитории.
+        // SwiftData-модели и репозитории. GameStore применяет итог урока,
+        // поэтому зависит и от LessonEngine.
         .target(
             name: "Persistence",
-            dependencies: ["Core", "ContentModels", "SRSEngine"],
+            dependencies: ["Core", "ContentModels", "SRSEngine", "LessonEngine"],
             path: "Sources/Persistence"
         ),
 

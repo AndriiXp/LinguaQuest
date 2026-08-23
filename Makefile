@@ -22,6 +22,7 @@ test: generate
 # Проверки, не требующие Xcode: схема контента и референсные алгоритмы.
 check:
 	python3 Tools/validate_content.py
+	python3 Tools/check_module_deps.py
 	python3 Tools/reference_algorithms.py
 
 clean:
