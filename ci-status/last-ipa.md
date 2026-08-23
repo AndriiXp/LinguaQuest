@@ -1,9 +1,9 @@
-# Сборка IPA #2 — success
+# Сборка IPA #3 — success
 
-- Коммит: `561ca37e5c176a9f84c16722fbb5f1bfb7a42a21`
-- Время: 2026-08-23 09:53 UTC
-- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32632220709
+- Коммит: `48ebf4a20e8494ec16bdb033e0c6d00d35cf4af3`
+- Время: 2026-08-23 10:28 UTC
+- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32633764697
 
-IPA готов (404K):
+IPA готов (484K):
 скачай артефакт `LinguaQuest-ipa` со страницы запуска и установи через Sideloadly.
 Инструкция: `Docs/deploy-to-iphone.md`
