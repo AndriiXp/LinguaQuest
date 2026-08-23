@@ -3,12 +3,15 @@ import SwiftData
 import Core
 import ContentModels
 import Persistence
+import SpeechKit
 
 @main
 struct LinguaQuestApp: App {
 
     @State private var bootstrap = AppBootstrap()
     @State private var coordinator = AppCoordinator()
+    /// Один синтезатор на всё приложение: несколько экземпляров перебивали бы друг друга.
+    @State private var speechPlayer = SpeechPlayer()
 
     var body: some Scene {
         WindowGroup {
@@ -21,6 +24,7 @@ struct LinguaQuestApp: App {
                     .environment(store)
                     .environment(catalog)
                     .environment(coordinator)
+                    .environment(speechPlayer)
             case .failed(let message):
                 StartupErrorScreen(message: message) {
                     bootstrap.start()

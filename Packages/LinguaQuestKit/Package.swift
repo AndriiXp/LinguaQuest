@@ -13,6 +13,7 @@ let package = Package(
         .library(name: "SRSEngine", targets: ["SRSEngine"]),
         .library(name: "LessonEngine", targets: ["LessonEngine"]),
         .library(name: "Persistence", targets: ["Persistence"]),
+        .library(name: "SpeechKit", targets: ["SpeechKit"]),
         .library(name: "UIComponents", targets: ["UIComponents"])
     ],
     targets: [
@@ -51,6 +52,13 @@ let package = Package(
             path: "Sources/Persistence"
         ),
 
+        // Озвучка, распознавание речи и оценка произношения.
+        // Отдельный модуль: тяжёлые системные фреймворки не тянутся туда, где не нужны.
+        .target(
+            name: "SpeechKit",
+            path: "Sources/SpeechKit"
+        ),
+
         // Переиспользуемые SwiftUI-компоненты.
         .target(
             name: "UIComponents",
@@ -77,6 +85,11 @@ let package = Package(
             name: "ContentModelsTests",
             dependencies: ["ContentModels"],
             path: "Tests/ContentModelsTests"
+        ),
+        .testTarget(
+            name: "SpeechKitTests",
+            dependencies: ["SpeechKit"],
+            path: "Tests/SpeechKitTests"
         )
     ]
 )

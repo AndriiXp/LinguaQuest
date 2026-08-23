@@ -160,6 +160,24 @@
             "v_morning"
           ],
           "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g1_e9",
+          "type": "listening",
+          "prompt": "Прослушайте и выберите, что вы услышали",
+          "correctAnswer": "Good morning",
+          "audioText": "Good morning",
+          "options": [
+            "Good morning",
+            "Good evening",
+            "Good night"
+          ],
+          "explanation": "Morning звучит с долгим [ɔː], night — с дифтонгом [aɪ].",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_morning"
+          ],
+          "errorCategory": "listening"
         }
       ]
     },
@@ -298,6 +316,19 @@
             "v_evening"
           ],
           "errorCategory": "vocabulary"
+        },
+        {
+          "id": "g2_e8",
+          "type": "speaking",
+          "prompt": "Произнесите вслух",
+          "correctAnswer": "Nice to meet you",
+          "audioText": "Nice to meet you",
+          "explanation": "Meet you в беглой речи сливается: [ˈmiːtʃuː].",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_nice"
+          ],
+          "errorCategory": "pronunciation"
         }
       ]
     }

@@ -13,13 +13,13 @@ public enum ExerciseType: String, Codable, CaseIterable, Sendable {
 
     /// Реализован ли тип в текущей сборке. Нереализованные задания
     /// загрузчик отфильтровывает, чтобы урок не упирался в пустой экран.
+    /// Все типы реализованы. Свойство осталось как предохранитель:
+    /// новый тип, добавленный в контент раньше кода, будет отфильтрован,
+    /// а не покажет пустой экран посреди урока.
     public var isImplemented: Bool {
         switch self {
-        case .multipleChoice, .typeAnswer, .matchPairs, .wordOrder, .fillBlank:
+        case .multipleChoice, .typeAnswer, .matchPairs, .wordOrder, .fillBlank, .listening, .speaking:
             return true
-        case .listening, .speaking:
-            // Ждут Спринта 4: TTS и распознавание речи.
-            return false
         }
     }
 }

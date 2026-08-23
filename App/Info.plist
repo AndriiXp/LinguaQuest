@@ -20,6 +20,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Микрофон нужен, чтобы проверять произношение в заданиях. Запись не сохраняется и никуда не отправляется.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Распознавание речи сравнивает произнесённую фразу с эталоном. Результат остаётся на устройстве.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchScreen</key>

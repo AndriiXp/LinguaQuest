@@ -16,8 +16,9 @@ CONTENT_DIR = Path(__file__).resolve().parent.parent / \
     "Packages/LinguaQuestKit/Sources/ContentModels/Resources/Content"
 
 # Держать синхронно с ExerciseType.isImplemented в Swift.
-IMPLEMENTED_TYPES = {"multiple_choice", "type_answer", "match_pairs", "word_order", "fill_blank"}
-KNOWN_TYPES = IMPLEMENTED_TYPES | {"listening", "speaking"}
+IMPLEMENTED_TYPES = {"multiple_choice", "type_answer", "match_pairs", "word_order",
+                     "fill_blank", "listening", "speaking"}
+KNOWN_TYPES = set(IMPLEMENTED_TYPES)
 CEFR = {"A1", "A2", "B1", "B2", "C1", "C2"}
 CATEGORIES = {"grammar", "vocab", "listening", "speaking"}
 
@@ -70,10 +71,14 @@ def validate_exercise(ex: dict, lesson_id: str, vocab_ids: set[str]) -> None:
             err(f"{ref}: correctAnswer '{ex['correctAnswer']}' отсутствует среди options")
         if len(set(options)) != len(options):
             err(f"{ref}: варианты ответа дублируются")
+        if ex_type == "listening" and not ex.get("audioText") and not ex.get("correctAnswer"):
+            err(f"{ref}: нечего озвучивать — нужен audioText")
 
     elif ex_type in ("type_answer", "speaking"):
         if not ex.get("correctAnswer"):
             err(f"{ref}: не задан correctAnswer")
+        if ex_type == "speaking" and not ex.get("audioText") and not ex.get("correctAnswer"):
+            err(f"{ref}: нечего произносить — нужен audioText или correctAnswer")
 
     elif ex_type == "fill_blank":
         if not ex.get("correctAnswer"):

@@ -145,6 +145,24 @@
             "v_dinner"
           ],
           "errorCategory": "word_form"
+        },
+        {
+          "id": "fv1_e8",
+          "type": "listening",
+          "prompt": "Прослушайте и выберите слово",
+          "correctAnswer": "cheese",
+          "audioText": "cheese",
+          "options": [
+            "cheese",
+            "chess",
+            "choose"
+          ],
+          "explanation": "Cheese — долгий [iː], choose — [uː].",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_cheese"
+          ],
+          "errorCategory": "listening"
         }
       ]
     },
@@ -307,6 +325,20 @@
             "v_please"
           ],
           "errorCategory": "word_order"
+        },
+        {
+          "id": "fv2_e9",
+          "type": "speaking",
+          "prompt": "Произнесите вслух",
+          "correctAnswer": "A glass of water please",
+          "audioText": "A glass of water, please",
+          "explanation": "Water по-британски [ˈwɔːtə], по-американски [ˈwɑːtər] — оба варианта верны.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_water",
+            "v_please"
+          ],
+          "errorCategory": "pronunciation"
         }
       ]
     }

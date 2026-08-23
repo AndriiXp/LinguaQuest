@@ -115,9 +115,9 @@ struct LessonView: View {
         VStack(alignment: .leading, spacing: DS.Spacing.xs) {
             // В fill_blank само предложение рисует вью задания — здесь только инструкция,
             // иначе текст с пропуском показывался бы дважды.
-            Text(exercise.type == .fillBlank ? "Вставьте пропущенное слово" : exercise.prompt)
-                .font(exercise.type == .fillBlank ? DS.Typography.callout : DS.Typography.exercisePrompt)
-                .foregroundStyle(exercise.type == .fillBlank ? DS.Colors.textSecondary : DS.Colors.textPrimary)
+            Text(promptText(for: exercise))
+                .font(isInstruction(exercise) ? DS.Typography.callout : DS.Typography.exercisePrompt)
+                .foregroundStyle(isInstruction(exercise) ? DS.Colors.textSecondary : DS.Colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
 
             if let translation = exercise.promptTranslation {
@@ -129,19 +129,46 @@ struct LessonView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
+    /// Текст над заданием. Для типов, где вью само показывает фразу,
+    /// сверху остаётся только инструкция.
+    private func promptText(for exercise: Exercise) -> String {
+        switch exercise.type {
+        case .fillBlank: return "Вставьте пропущенное слово"
+        case .speaking: return "Произнесите фразу"
+        default: return exercise.prompt
+        }
+    }
+
+    private func isInstruction(_ exercise: Exercise) -> Bool {
+        exercise.type == .fillBlank || exercise.type == .speaking
+    }
+
     @ViewBuilder
     private func exerciseBody(exercise: Exercise, session: LessonSession) -> some View {
         switch exercise.type {
-        case .multipleChoice, .listening:
+        case .multipleChoice:
             MultipleChoiceExerciseView(
                 exercise: exercise,
                 selected: $selectedOption,
                 isLocked: isFeedbackVisible(session),
                 correctAnswer: revealedAnswer(session)
             )
-        case .typeAnswer, .speaking:
+        case .listening:
+            ListeningExerciseView(
+                exercise: exercise,
+                selected: $selectedOption,
+                isLocked: isFeedbackVisible(session),
+                correctAnswer: revealedAnswer(session)
+            )
+        case .typeAnswer:
             TypeAnswerExerciseView(
                 text: $draftText,
+                isLocked: isFeedbackVisible(session)
+            )
+        case .speaking:
+            SpeakingExerciseView(
+                exercise: exercise,
+                recognized: $draftText,
                 isLocked: isFeedbackVisible(session)
             )
         case .matchPairs:

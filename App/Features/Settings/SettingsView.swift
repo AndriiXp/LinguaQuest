@@ -10,6 +10,9 @@ struct SettingsView: View {
     @Environment(ContentCatalog.self) private var catalog
     @Environment(AppCoordinator.self) private var coordinator
 
+    @State private var scheduler = ReminderScheduler()
+    @State private var permissionDenied = false
+
     var body: some View {
         Form {
             Section("Игра") {
@@ -29,11 +32,26 @@ struct SettingsView: View {
                 Toggle("Вибрация", isOn: hapticsBinding)
             }
 
-            Section("Уведомления") {
-                Toggle("Напоминания о занятиях", isOn: remindersBinding)
-                Text("Локальные напоминания подключаются в Спринте 4.")
-                    .font(DS.Typography.caption)
-                    .foregroundStyle(DS.Colors.textSecondary)
+            Section("Напоминания") {
+                Toggle("Напоминать о занятиях", isOn: remindersBinding)
+
+                if store.profile.settings?.dailyReminderEnabled == true {
+                    DatePicker(
+                        "Время",
+                        selection: reminderTimeBinding,
+                        displayedComponents: .hourAndMinute
+                    )
+                }
+
+                if permissionDenied {
+                    Text("Уведомления запрещены в системных настройках. Включите их в Настройках → LinguaQuest → Уведомления.")
+                        .font(DS.Typography.caption)
+                        .foregroundStyle(DS.Colors.danger)
+                } else {
+                    Text("Одно напоминание в день и предупреждение вечером, если серия под угрозой.")
+                        .font(DS.Typography.caption)
+                        .foregroundStyle(DS.Colors.textSecondary)
+                }
             }
 
             Section("О приложении") {
@@ -55,6 +73,51 @@ struct SettingsView: View {
         }
         .navigationTitle("Настройки")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            // Пользователь мог отключить уведомления в системных настройках
+            // уже после того, как включил их здесь — проверяем при каждом открытии.
+            let status = await scheduler.authorizationStatus()
+            permissionDenied = status == .denied
+        }
+    }
+
+    // MARK: - Напоминания
+
+    private var reminderTimeBinding: Binding<Date> {
+        Binding(
+            get: { store.profile.settings?.reminderTime ?? ReminderScheduler.defaultTime() },
+            set: { newValue in
+                store.profile.settings?.reminderTime = newValue
+                store.save()
+                Task { await rescheduleReminders() }
+            }
+        )
+    }
+
+    private func rescheduleReminders() async {
+        guard store.profile.settings?.dailyReminderEnabled == true else {
+            scheduler.cancelAll()
+            return
+        }
+
+        let granted = await scheduler.requestAuthorization()
+        guard granted else {
+            permissionDenied = true
+            store.profile.settings?.dailyReminderEnabled = false
+            store.save()
+            return
+        }
+        permissionDenied = false
+
+        let time = store.profile.settings?.reminderTime ?? ReminderScheduler.defaultTime()
+        await scheduler.scheduleDaily(
+            at: ReminderScheduler.components(from: time),
+            streak: store.profile.streakCount
+        )
+        await scheduler.scheduleStreakWarning(
+            streak: store.profile.streakCount,
+            goalReached: store.profile.todayXP >= store.profile.dailyGoalXP
+        )
     }
 
     // MARK: - Привязки к настройкам
@@ -85,7 +148,11 @@ struct SettingsView: View {
             get: { store.profile.settings?.dailyReminderEnabled ?? false },
             set: { newValue in
                 store.profile.settings?.dailyReminderEnabled = newValue
+                if newValue && store.profile.settings?.reminderTime == nil {
+                    store.profile.settings?.reminderTime = ReminderScheduler.defaultTime()
+                }
                 store.save()
+                Task { await rescheduleReminders() }
             }
         )
     }
