@@ -31,9 +31,12 @@ jobs:
           xcodebuild -version
           swift --version
 
-      - name: Проверка контента и референсных алгоритмов
+      # Быстрые проверки идут первыми: они не требуют Xcode и ловят
+      # часть ошибок за секунду вместо десяти минут сборки.
+      - name: Проверка контента, зависимостей и алгоритмов
         run: |
           python3 Tools/validate_content.py
+          python3 Tools/check_module_deps.py
           python3 Tools/reference_algorithms.py
 
       - name: Установить XcodeGen
