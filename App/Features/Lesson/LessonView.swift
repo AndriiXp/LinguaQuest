@@ -288,6 +288,9 @@ struct LessonView: View {
             }
         case .wordOrder:
             input = .tokens(draftTokens)
+        case .matchPairs:
+            // Пары отправляются по одной прямо из вью задания — кнопки «Проверить» там нет.
+            return
         }
 
         _ = session.submit(input)
