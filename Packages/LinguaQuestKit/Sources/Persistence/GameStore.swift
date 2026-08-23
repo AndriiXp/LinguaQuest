@@ -485,6 +485,43 @@ public final class GameStore {
         (try? context.fetch(FetchDescriptor<SRSCard>())) ?? []
     }
 
+    /// Записывает итог сессии повторения: новое расписание карточек и XP за работу.
+    public func applyReview(summary: ReviewSummary) {
+        guard summary.total > 0 else { return }
+        refreshDailyCounters()
+
+        let cards = Dictionary(allCards().map { ($0.itemId, $0) }, uniquingKeysWith: { first, _ in first })
+        for outcome in summary.outcomes {
+            cards[outcome.itemId]?.apply(outcome.updatedState)
+        }
+
+        // Повторение тоже двигает дневную цель — иначе им незачем заниматься
+        // в день, когда уроки уже пройдены.
+        let xp = summary.remembered * GameRules.xpPerReviewedCard
+        if xp > 0 {
+            profile.xpTotal += xp
+            profile.todayXP += xp
+            profile.level = Progression.level(forTotalXP: profile.xpTotal)
+            recordActivity(xp: xp, at: now())
+
+            if profile.todayXP >= profile.dailyGoalXP {
+                let state = StreakState(
+                    count: profile.streakCount,
+                    freezes: profile.streakFreezes,
+                    lastActiveDay: profile.streakLastActive
+                )
+                let (updated, event) = StreakCalculator.registerGoalReached(state, now: now())
+                applyStreak(updated)
+                lastStreakEvent = event
+            }
+        }
+
+        save()
+        refreshDueCardsCount()
+        syncAchievements()
+        save()
+    }
+
     // MARK: - Аватары
 
     public func selectAvatar(_ avatarId: String) {

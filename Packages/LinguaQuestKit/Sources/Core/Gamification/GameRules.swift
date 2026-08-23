@@ -23,6 +23,9 @@ public enum GameRules {
     public static let coinsPerLesson = 5
     /// Дополнительные монеты за безошибочный урок.
     public static let perfectLessonBonusCoins = 3
+    /// XP за каждую вспомненную карточку в сессии повторения.
+    /// Меньше, чем за урок: повторение короче и легче, но должно двигать дневную цель.
+    public static let xpPerReviewedCard = 1
 
     // MARK: - Mastery (короны навыка)
 

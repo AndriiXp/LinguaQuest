@@ -287,6 +287,26 @@
             "v_please"
           ],
           "errorCategory": "register"
+        },
+        {
+          "id": "fv2_e8",
+          "type": "word_order",
+          "prompt": "Соберите вежливую просьбу: «Стакан воды, пожалуйста»",
+          "correctAnswer": "A glass of water please",
+          "tokens": [
+            "A",
+            "glass",
+            "of",
+            "water",
+            "please"
+          ],
+          "explanation": "A glass of water, please — стандартная форма заказа.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_water",
+            "v_please"
+          ],
+          "errorCategory": "word_order"
         }
       ]
     }

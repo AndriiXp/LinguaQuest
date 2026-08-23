@@ -25,7 +25,7 @@ struct RootView: View {
             .tag(AppTab.learn)
 
             NavigationStack {
-                ReviewPlaceholderView()
+                ReviewView()
             }
             .tabItem {
                 Label("Повтор", systemImage: "arrow.triangle.2.circlepath")
@@ -76,33 +76,5 @@ struct RootView: View {
         case .dailyGoalPicker:
             NavigationStack { DailyGoalPickerView() }
         }
-    }
-}
-
-/// Экран повторения появится в Спринте 3 — заглушка честно об этом говорит
-/// и уже показывает, сколько карточек ждёт повторения.
-struct ReviewPlaceholderView: View {
-    @Environment(GameStore.self) private var store
-
-    var body: some View {
-        let due = store.dueCardsCount
-
-        VStack(spacing: DS.Spacing.md) {
-            Image(systemName: "rectangle.stack.fill")
-                .font(.system(size: 52))
-                .foregroundStyle(DS.Colors.primary)
-            Text(due > 0 ? "К повторению: \(due)" : "Пока нечего повторять")
-                .font(DS.Typography.title)
-                .foregroundStyle(DS.Colors.textPrimary)
-            Text("Карточки уже накапливаются из пройденных уроков. Экран повторения появится в следующем спринте.")
-                .font(DS.Typography.callout)
-                .foregroundStyle(DS.Colors.textSecondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, DS.Spacing.lg)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(DS.Colors.background)
-        .navigationTitle("Повторение")
-        .onAppear { store.refreshDueCardsCount() }
     }
 }

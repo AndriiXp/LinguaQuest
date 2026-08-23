@@ -154,6 +154,26 @@
             "v_speak"
           ],
           "errorCategory": "tense"
+        },
+        {
+          "id": "ps1_e8",
+          "type": "word_order",
+          "prompt": "Соберите предложение: «Мы учим английский каждый день»",
+          "correctAnswer": "We study English every day",
+          "tokens": [
+            "We",
+            "study",
+            "English",
+            "every",
+            "day"
+          ],
+          "explanation": "Порядок в Present Simple: кто → что делает → что → когда.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_study",
+            "v_every_day"
+          ],
+          "errorCategory": "word_order"
         }
       ]
     },
@@ -314,6 +334,23 @@
             "v_usually"
           ],
           "errorCategory": "spelling"
+        },
+        {
+          "id": "ps2_e9",
+          "type": "fill_blank",
+          "prompt": "My sister ___ two languages.",
+          "correctAnswer": "speaks",
+          "options": [
+            "speaks",
+            "speak",
+            "speaking"
+          ],
+          "explanation": "My sister = she, поэтому speaks.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_speak"
+          ],
+          "errorCategory": "tense"
         }
       ]
     },
@@ -472,6 +509,25 @@
           ],
           "errorCategory": "question_form",
           "explanation": "Краткий ответ повторяет вспомогательный глагол вопроса: Do → do, Does → does."
+        },
+        {
+          "id": "ps3_e9",
+          "type": "word_order",
+          "prompt": "Соберите вопрос: «Ты живёшь в Киеве?»",
+          "correctAnswer": "Do you live in Kyiv",
+          "tokens": [
+            "Do",
+            "you",
+            "live",
+            "in",
+            "Kyiv"
+          ],
+          "explanation": "Вопрос начинается со вспомогательного do, потом подлежащее и глагол.",
+          "difficulty": 3,
+          "vocabularyIds": [
+            "v_live"
+          ],
+          "errorCategory": "question_form"
         }
       ]
     }

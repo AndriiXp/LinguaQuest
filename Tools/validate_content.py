@@ -15,8 +15,9 @@ from pathlib import Path
 CONTENT_DIR = Path(__file__).resolve().parent.parent / \
     "Packages/LinguaQuestKit/Sources/ContentModels/Resources/Content"
 
-IMPLEMENTED_TYPES = {"multiple_choice", "type_answer", "match_pairs"}
-KNOWN_TYPES = IMPLEMENTED_TYPES | {"word_order", "fill_blank", "listening", "speaking"}
+# Держать синхронно с ExerciseType.isImplemented в Swift.
+IMPLEMENTED_TYPES = {"multiple_choice", "type_answer", "match_pairs", "word_order", "fill_blank"}
+KNOWN_TYPES = IMPLEMENTED_TYPES | {"listening", "speaking"}
 CEFR = {"A1", "A2", "B1", "B2", "C1", "C2"}
 CATEGORIES = {"grammar", "vocab", "listening", "speaking"}
 

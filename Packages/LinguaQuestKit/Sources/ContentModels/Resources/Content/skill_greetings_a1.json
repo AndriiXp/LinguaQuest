@@ -148,6 +148,18 @@
             "v_nice"
           ],
           "errorCategory": "pronouns"
+        },
+        {
+          "id": "g1_e8",
+          "type": "fill_blank",
+          "prompt": "Good ___! (в девять утра)",
+          "correctAnswer": "morning",
+          "explanation": "До полудня — good morning.",
+          "difficulty": 2,
+          "vocabularyIds": [
+            "v_morning"
+          ],
+          "errorCategory": "vocabulary"
         }
       ]
     },

@@ -19,6 +19,8 @@ struct LessonView: View {
     @State private var session: LessonSession?
     @State private var draftText = ""
     @State private var selectedOption: String?
+    /// Собранное предложение в задании word_order.
+    @State private var draftTokens: [String] = []
     @State private var showQuitConfirmation = false
 
     var body: some View {
@@ -111,9 +113,11 @@ struct LessonView: View {
 
     private func prompt(for exercise: Exercise) -> some View {
         VStack(alignment: .leading, spacing: DS.Spacing.xs) {
-            Text(exercise.prompt)
-                .font(DS.Typography.exercisePrompt)
-                .foregroundStyle(DS.Colors.textPrimary)
+            // В fill_blank само предложение рисует вью задания — здесь только инструкция,
+            // иначе текст с пропуском показывался бы дважды.
+            Text(exercise.type == .fillBlank ? "Вставьте пропущенное слово" : exercise.prompt)
+                .font(exercise.type == .fillBlank ? DS.Typography.callout : DS.Typography.exercisePrompt)
+                .foregroundStyle(exercise.type == .fillBlank ? DS.Colors.textSecondary : DS.Colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
 
             if let translation = exercise.promptTranslation {
@@ -161,11 +165,20 @@ struct LessonView: View {
                     }
                 }
             )
-        case .wordOrder, .fillBlank:
-            // Типы появятся в Спринте 3; каталог такие задания не отдаёт.
-            Text("Этот тип задания пока не поддерживается")
-                .font(DS.Typography.callout)
-                .foregroundStyle(DS.Colors.textSecondary)
+        case .wordOrder:
+            WordOrderExerciseView(
+                exercise: exercise,
+                chosen: $draftTokens,
+                isLocked: isFeedbackVisible(session)
+            )
+        case .fillBlank:
+            FillBlankExerciseView(
+                exercise: exercise,
+                text: $draftText,
+                selected: $selectedOption,
+                isLocked: isFeedbackVisible(session),
+                correctAnswer: revealedAnswer(session)
+            )
         }
     }
 
@@ -266,8 +279,15 @@ struct LessonView: View {
             input = .choice(selectedOption)
         case .typeAnswer, .speaking:
             input = .text(draftText)
-        default:
-            return
+        case .fillBlank:
+            // Пропуск заполняется либо выбором варианта, либо вводом слова.
+            if let selectedOption {
+                input = .choice(selectedOption)
+            } else {
+                input = .text(draftText)
+            }
+        case .wordOrder:
+            input = .tokens(draftTokens)
         }
 
         _ = session.submit(input)
@@ -293,6 +313,7 @@ struct LessonView: View {
     private func resetInputs() {
         draftText = ""
         selectedOption = nil
+        draftTokens = []
     }
 
     private func canSubmit(exercise: Exercise) -> Bool {
@@ -301,7 +322,11 @@ struct LessonView: View {
             return selectedOption != nil
         case .typeAnswer, .speaking:
             return !draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        default:
+        case .fillBlank:
+            return selectedOption != nil || !draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        case .wordOrder:
+            return !draftTokens.isEmpty
+        case .matchPairs:
             return false
         }
     }

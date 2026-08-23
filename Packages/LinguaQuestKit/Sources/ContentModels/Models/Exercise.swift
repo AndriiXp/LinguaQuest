@@ -15,9 +15,10 @@ public enum ExerciseType: String, Codable, CaseIterable, Sendable {
     /// загрузчик отфильтровывает, чтобы урок не упирался в пустой экран.
     public var isImplemented: Bool {
         switch self {
-        case .multipleChoice, .typeAnswer, .matchPairs:
+        case .multipleChoice, .typeAnswer, .matchPairs, .wordOrder, .fillBlank:
             return true
-        case .wordOrder, .fillBlank, .listening, .speaking:
+        case .listening, .speaking:
+            // Ждут Спринта 4: TTS и распознавание речи.
             return false
         }
     }
