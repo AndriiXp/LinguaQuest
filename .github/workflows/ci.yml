@@ -19,6 +19,9 @@ jobs:
     name: Сборка и тесты
     runs-on: macos-latest
     timeout-minutes: 40
+    # Нужно, чтобы workflow мог записать результат сборки обратно в репозиторий.
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -88,6 +91,45 @@ jobs:
               | grep -v "^$" | head -60 || echo "Ошибок по шаблону не найдено — смотри артефакт build-logs"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+      # Логи Actions читаются только с авторизацией, поэтому короткая выжимка
+      # кладётся прямо в репозиторий: её видно в открытом виде, и разбирать
+      # падение можно без доступа к аккаунту и без ручного копирования.
+      - name: Записать результат в репозиторий
+        if: always()
+        run: |
+          mkdir -p ci-status
+          {
+            echo "# Сборка #${{ github.run_number }} — ${{ job.status }}"
+            echo
+            echo "- Коммит: \`${{ github.sha }}\`"
+            echo "- Время: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo "- Запуск: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo
+            if [ "${{ job.status }}" = "success" ]; then
+              echo "Сборка и тесты прошли. Можно запускать «Сборка IPA для телефона»."
+            else
+              echo '## Ошибки компиляции'
+              echo '```'
+              grep -hE "error:" xcodebuild.log swift-test.log 2>/dev/null | sort -u | head -60 \
+                || echo "(не найдено по шаблону error: — смотри полный лог в артефактах)"
+              echo '```'
+              echo
+              echo '## Упавшие тесты'
+              echo '```'
+              grep -hE "^Test Case.*failed|XCTAssert.*failed" swift-test.log 2>/dev/null | head -40 \
+                || echo "(нет)"
+              echo '```'
+            fi
+          } > ci-status/last-build.md
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ci-status/last-build.md
+          # [skip ci] и то, что пуш идёт под GITHUB_TOKEN, исключают зацикливание.
+          git commit -m "CI: результат сборки #${{ github.run_number }} [skip ci]" || exit 0
+          git pull --rebase --autostash || true
+          git push || echo "Не удалось записать результат — не критично, есть артефакты"
 
       - name: Логи
         if: always()
