@@ -1,10 +1,10 @@
-# Сборка IPA #5 — success
+# Сборка IPA #6 — success
 
-- Коммит: `50036a4faff387fac4ceff4533763a0a2a4f3837`
-- Время: 2026-08-23 11:58 UTC
-- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32637992285
+- Коммит: `ae49adea3f0d70f64a50d26f54fdaf6989235fdc`
+- Время: 2026-08-23 13:49 UTC
+- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32643453100
 
-IPA готов (544K).
+IPA готов (604K).
 
 Постоянная ссылка (открывается без входа в GitHub, всегда свежая сборка):
 https://github.com/AndriiXp/LinguaQuest/releases/download/latest/LinguaQuest.ipa
