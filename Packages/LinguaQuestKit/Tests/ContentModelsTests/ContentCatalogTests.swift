@@ -138,15 +138,25 @@ final class ContentCatalogTests: XCTestCase {
         }
     }
 
+    /// Проверяет сам механизм фильтрации, а не конкретный тип задания.
+    /// Тест берёт первый нереализованный тип, какой найдётся, — поэтому
+    /// не ломается каждый раз, когда очередной тип реализуют.
     func testUnimplementedExerciseTypesAreSkipped() throws {
-        // listening ждёт Спринта 4 — задание должно отфильтроваться при загрузке.
-        // Когда тип реализуют, этот тест упадёт и напомнит обновить проверку.
+        let unimplemented = ExerciseType.allCases.filter { !$0.isImplemented }
+        try XCTSkipIf(
+            unimplemented.isEmpty,
+            "Все типы заданий реализованы — фильтровать нечего"
+        )
+
+        let type = unimplemented[0]
         let future = Exercise(
             id: "future",
-            type: .listening,
-            prompt: "Прослушайте и выберите",
+            type: type,
+            prompt: "Задание неподдерживаемого типа ___",
             correctAnswer: "water",
             options: ["water", "bread"],
+            pairs: [MatchPair(id: "p1", left: "a", right: "б"), MatchPair(id: "p2", left: "c", right: "г")],
+            tokens: ["I", "drink", "water"],
             audioText: "water"
         )
         let good = Exercise(id: "good", type: .typeAnswer, prompt: "Переведите", correctAnswer: "water")
@@ -164,6 +174,17 @@ final class ContentCatalogTests: XCTestCase {
 
         XCTAssertEqual(catalog.lesson(id: "l1")?.exercises.map(\.id), ["good"])
         XCTAssertEqual(catalog.validationIssues.count, 1)
+    }
+
+    /// Контент любого типа должен доходить до экрана. Если тест упал —
+    /// в enum появился тип, для которого не написан экран, и задания такого
+    /// типа будут молча исчезать из уроков.
+    func testAllExerciseTypesAreImplemented() {
+        let unimplemented = ExerciseType.allCases.filter { !$0.isImplemented }
+        XCTAssertTrue(
+            unimplemented.isEmpty,
+            "Нет экранов для типов: \(unimplemented.map(\.rawValue).joined(separator: ", "))"
+        )
     }
 
     // MARK: - Правила валидации заданий
