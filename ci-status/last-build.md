@@ -1,7 +1,7 @@
-# Сборка #12 — success
+# Сборка #13 — success
 
-- Коммит: `50036a4faff387fac4ceff4533763a0a2a4f3837`
-- Время: 2026-08-23 11:59 UTC
-- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32637977358
+- Коммит: `e093f16ae1b38889384ff03e39863d8ff2c3824b`
+- Время: 2026-08-23 12:21 UTC
+- Запуск: https://github.com/AndriiXp/LinguaQuest/actions/runs/32638991125
 
 Сборка и тесты прошли. Можно запускать «Сборка IPA для телефона».
