@@ -7,8 +7,11 @@ public struct BundledContentSource: ContentSource {
     private let bundle: Bundle
     private let subdirectory: String
 
-    public init(bundle: Bundle = .module, subdirectory: String = "Content") {
-        self.bundle = bundle
+    /// - Parameter bundle: nil означает бандл ресурсов самого пакета.
+    ///   `Bundle.module` нельзя поставить значением по умолчанию у public-инициализатора:
+    ///   SwiftPM генерирует это свойство как internal.
+    public init(bundle: Bundle? = nil, subdirectory: String = "Content") {
+        self.bundle = bundle ?? .module
         self.subdirectory = subdirectory
     }
 

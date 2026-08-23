@@ -31,3 +31,6 @@ GoogleService-Info.plist
 
 # временные файлы переноса
 _to_delete/
+
+# токен доступа — НИКОГДА не коммитить
+.secrets/
